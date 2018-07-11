@@ -25,6 +25,7 @@ class Server {
                 projectId: process.env.AIRBRAKE_PROJECT_ID,
                 projectKey: process.env.AIRBRAKE_API_KEY
             });
+            const makeErrorHandler = require('airbrake-js/dist/instrumentation/express');
             this.app.use(makeErrorHandler(airbrake));
         }
     }
