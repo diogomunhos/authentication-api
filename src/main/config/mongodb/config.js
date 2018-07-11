@@ -1,5 +1,5 @@
 module.exports = {
-    db: process.env.DATABASE_URL,
+    db: process.env.MONGODB_URI,
     app: {
         name: 'projectfa-production'
     }
