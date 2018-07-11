@@ -12,10 +12,10 @@ class Server {
         if (this.isDevEnvironment()) {
             this.createDevEnvironment();
         }
-        this.initErrorMonitor();
         this.bodyParserConfiguration();
         this.routesConfiguration();
         this.createDataBaseConnection();
+        this.initErrorMonitor();
     }
 
     initErrorMonitor() {
