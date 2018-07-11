@@ -25,7 +25,7 @@ class Server {
                 projectId: process.env.AIRBRAKE_PROJECT_ID,
                 projectKey: process.env.AIRBRAKE_API_KEY
             });
-            this.app.use(makeErrorHandler(airbrake));
+            this.app.use(airbrake);
         }
     }
 
