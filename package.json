@@ -1,0 +1,39 @@
+{
+    "name": "authentication-api",
+    "version": "0.1.0",
+    "description": "Authentication API from ProjectFa",
+    "main": "app.js",
+    "scripts": {
+        "test": "DEBUG=true cucumber-js --require src/test/features/support src/test/features/login/login.feature",
+        "start": "node app.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Wahiga/authentication-api.git"
+    },
+    "keywords": [],
+    "author": "Diogo Munhos",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Wahiga/authentication-api/issues"
+    },
+    "homepage": "https://github.com/Wahiga/authentication-api#readme",
+    "dependencies": {
+        "body-parser": "^1.18.3",
+        "express": "^4.16.3",
+        "express-promise-router": "^3.0.2",
+        "jsonwebtoken": "^8.3.0",
+        "mongoose": "^5.1.5"
+    },
+    "devDependencies": {
+        "assert": "^1.4.1",
+        "chai": "^4.1.2",
+        "chai-as-promised": "^7.1.1",
+        "cucumber": "^4.2.1",
+        "dotenv": "^6.0.0",
+        "nconf": "^0.10.0",
+        "nodemon": "^1.17.5",
+        "request": "^2.87.0",
+        "request-promise": "^4.2.2"
+    }
+}
