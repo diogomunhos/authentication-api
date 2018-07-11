@@ -1,6 +1,6 @@
 class UserHelper {
     constructor() {
-        this.macGyver = require('../../../seeds/data/users');
+        this.macGyver = require('../../../seeds/data/users.seed');
     }
 
     getWrongCredentials() {

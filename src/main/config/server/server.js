@@ -39,7 +39,7 @@ class Server {
     }
 
     routesConfiguration() {
-        const mountRoutes = require('../../routes/index');
+        const mountRoutes = require('../../routes/index.route');
         mountRoutes(this.app);
     }
 

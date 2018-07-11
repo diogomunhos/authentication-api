@@ -1,7 +1,7 @@
 class AuthenticationService {
     constructor() {
         this.UserHelper = require('../../helpers/user.helper');
-        this.UserModel = require('../../models/user');
+        this.UserModel = require('../../models/user.model');
         this.ModelHelper = require('../../helpers/model.helper');
         this.ResponseHelper = require('../../helpers/response.helper');
     }

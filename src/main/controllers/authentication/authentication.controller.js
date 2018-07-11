@@ -2,7 +2,7 @@ class AuthenticationController {
     constructor(req, res) {
         this.req = req;
         this.res = res;
-        this.AuthenticationService = require('../../services/authentication/authentication')
+        this.AuthenticationService = require('../../services/authentication/authentication.service')
     }
 
 
