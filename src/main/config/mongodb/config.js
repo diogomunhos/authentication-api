@@ -3,6 +3,6 @@ module.exports = {
         db: process.env.MONGODB_URI
     },
     test: {
-        db: process.env.MONGODB_URI
+        db: process.env.MONGOLAB_CHARCOAL_URI
     }
 };
