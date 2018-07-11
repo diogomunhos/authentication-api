@@ -12,9 +12,20 @@ class Server {
         if (this.isDevEnvironment()) {
             this.createDevEnvironment();
         }
+        this.initErrorMonitor();
         this.bodyParserConfiguration();
         this.routesConfiguration();
         this.createDataBaseConnection();
+    }
+
+    initErrorMonitor() {
+        if (process.env.AIRBRAKE_PROJECT_ID !== undefined && process.env.AIRBRAKE_API_KEY !== undefined) {
+            const AirbrakeClient = require('airbrake-js');
+            const airbrake = new AirbrakeClient({
+                projectId: process.env.AIRBRAKE_PROJECT_ID,
+                projectKey: process.env.AIRBRAKE_API_KEY
+            });
+        }
     }
 
     setDatabaseName(database_name) {
