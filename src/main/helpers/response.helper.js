@@ -7,12 +7,11 @@ class ResponseHelper {
         return { statusCode: 200, response: { type: 'Bearer', token } };
     }
 
+    createSignupSuccessResponse() {
+        return { statusCode: 200, response: { message: "User created" } };
+    }
+
     createFailResponse(statusCode, err) {
-        // let i = 0;
-        // while (i < 1000000) {
-        //     i++;
-        //     console.log(i);
-        // }
         return { statusCode, response: { type: err.name, message: err.message } };
     }
 }

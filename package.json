@@ -4,7 +4,7 @@
     "description": "Authentication API from ProjectFa",
     "main": "app.js",
     "scripts": {
-        "test": "DEBUG=true cucumber-js --require src/test/features/support src/test/features/login/login.feature",
+        "test": "DEBUG=true cucumber-js --require src/test/features/support src/test/features/**/*.feature",
         "start": "node app.js"
     },
     "repository": {

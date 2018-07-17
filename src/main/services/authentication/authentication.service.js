@@ -16,7 +16,8 @@ class AuthenticationService {
             const response = await this.ResponseHelper.createSuccessResponse(user[0]);
             return response;
         } catch (err) {
-            return this.ResponseHelper.createFailResponse(401, err);
+            const response = await this.ResponseHelper.createFailResponse(401, err);
+            return response;
         }
     }
 }

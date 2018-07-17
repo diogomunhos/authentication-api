@@ -8,9 +8,4 @@ router.post('/login', (req, res) => {
     controller.login();
 })
 
-router.get('/teste', (req, res) => {
-    a = b + c;
-    return a;
-})
-
 module.exports = router;
