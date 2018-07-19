@@ -1,7 +1,20 @@
 const { Given, When, Then, And } = require('cucumber')
 const assert = require('assert');
-
+let user;
 Given('I don\'t have a user', function(callback) {
+    callback();
+})
+
+Given('I have an user', function(callback) {
+    user = require('../../../seeds/data/users.seed')
+    callback();
+})
+
+Given('I try to create a new user with the same credentials', function(callback) {
+    const request = user;
+    this.setSignupRequest(request);
+
+    assert.equal(this.getSignupRequest(), request);
     callback();
 })
 
@@ -11,7 +24,67 @@ Given('I fill the informations correctly', function(callback) {
         last_name: "name",
         email: "teste@teste.com",
         username: "teste@teste.com",
-        password: "123456"
+        password: "Password#2018"
+    };
+
+    this.setSignupRequest(request);
+
+    assert.equal(this.getSignupRequest(), request);
+    callback();
+})
+
+Given('I fill the informations with a week password with no uppercase character', function(callback) {
+    const request = {
+        first_name: "teste",
+        last_name: "name",
+        email: "teste@teste.com",
+        username: "teste@teste.com",
+        password: "password#2018"
+    };
+
+    this.setSignupRequest(request);
+
+    assert.equal(this.getSignupRequest(), request);
+    callback();
+})
+
+Given('I fill the informations with a week password with no lowercase character', function(callback) {
+    const request = {
+        first_name: "teste",
+        last_name: "name",
+        email: "teste@teste.com",
+        username: "teste@teste.com",
+        password: "PASSWORD#2018"
+    };
+
+    this.setSignupRequest(request);
+
+    assert.equal(this.getSignupRequest(), request);
+    callback();
+})
+
+Given('I fill the informations with a week password with no special character', function(callback) {
+    const request = {
+        first_name: "teste",
+        last_name: "name",
+        email: "teste@teste.com",
+        username: "teste@teste.com",
+        password: "Password2018"
+    };
+
+    this.setSignupRequest(request);
+
+    assert.equal(this.getSignupRequest(), request);
+    callback();
+})
+
+Given('I fill the informations with a week password with smaller than 8 characters', function(callback) {
+    const request = {
+        first_name: "teste",
+        last_name: "name",
+        email: "teste@teste.com",
+        username: "teste@teste.com",
+        password: "Pass#20"
     };
 
     this.setSignupRequest(request);
@@ -25,7 +98,7 @@ Given('I fill the informations without last name', function(callback) {
         first_name: "teste",
         email: "teste@teste.com",
         username: "teste@teste.com",
-        password: "123456"
+        password: "Password#2018"
     };
 
     this.setSignupRequest(request);
@@ -39,7 +112,7 @@ Given('I fill the informations without first name', function(callback) {
         last_name: "name",
         email: "teste@teste.com",
         username: "teste@teste.com",
-        password: "123456"
+        password: "Password#2018"
     };
 
     this.setSignupRequest(request);
@@ -52,7 +125,7 @@ Given('I fill the informations without email', function(callback) {
         first_name: "teste",
         last_name: "name",
         username: "teste@teste.com",
-        password: "123456"
+        password: "Password#2018"
     };
 
     this.setSignupRequest(request);
@@ -67,6 +140,21 @@ Given('I fill the informations without password', function(callback) {
         last_name: "name",
         email: "teste@teste.com",
         username: "teste@teste.com"
+    };
+
+    this.setSignupRequest(request);
+
+    assert.equal(this.getSignupRequest(), request);
+    callback();
+})
+
+Given('I fill the informations with an email format invalid', function(callback) {
+    const request = {
+        first_name: "teste",
+        last_name: "name",
+        email: "teste.teste.com",
+        username: "teste@teste.com",
+        password: "Password#2018"
     };
 
     this.setSignupRequest(request);

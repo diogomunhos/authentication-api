@@ -5,6 +5,11 @@ class StringCommonHelper {
         return re.test(String(email).toLowerCase());
     }
 
+    isPasswordStrong(password) {
+        const regex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+        return regex.test(password);
+    }
+
 }
 
 module.exports = new StringCommonHelper();

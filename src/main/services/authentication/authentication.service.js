@@ -10,9 +10,9 @@ class AuthenticationService {
         try {
             const userHelper = new this.UserHelper({ username, password });
             userHelper.isValidToLogin();
-            const user = await this.UserModel.find(userHelper.user).exec();
+            const user = await this.UserModel.find({ username: userHelper.user.username }).exec();
             userHelper.setUser(user);
-            userHelper.isValidCredentials();
+            userHelper.isValidCredentials(password);
             const response = await this.ResponseHelper.createSuccessResponse(user[0]);
             return response;
         } catch (err) {

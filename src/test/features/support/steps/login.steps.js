@@ -42,6 +42,7 @@ Given('there I dont have a password', function(callback) {
 
 Given('There I have a valid username and password', function(callback) {
     const credentials = userHelper.getValidCredentials();
+
     this.setCredentials(credentials);
     assert.equal(this.getCredentials(), credentials);
     callback();
@@ -53,8 +54,3 @@ Then('I should receive a status code {int} with a token', function(statusCode, c
     assert.notEqual(this.getResponse().body.token, null);
     callback();
 })
-
-// Scenario: Login Successful
-// Given There I have a valid username and password
-// When I send a request to authentication api login method
-// Then I should receive a status code 200 with a token

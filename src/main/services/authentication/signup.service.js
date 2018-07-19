@@ -8,18 +8,16 @@ class SignupService {
 
     async signup(signup_request) {
         try {
-            console.log('request', signup_request);
             const signupHelper = new this.SignupHelper(signup_request);
             signupHelper.isRequestValid();
-            console.log('valido');
+            const result = await this.UserModel.find({ username: signup_request.username }).exec();
+            signupHelper.userExists(result);
+            signup_request.password = signupHelper.encryptPassword(signup_request.password);
             const model = new this.UserModel(signup_request);
-            console.log('model criado');
             const user = await model.save();
-            console.log('model salvo');
             const response = await this.ResponseHelper.createSignupSuccessResponse();
             return response;
         } catch (err) {
-            console.log('catch entrou');
             const response = await this.ResponseHelper.createFailResponse(401, err);
             return response;
         }

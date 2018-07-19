@@ -8,26 +8,62 @@ Feature: Create a new user using authentication api
         When I send the request to authentication api signup method
         Then I should receive a response with status code 200 and a message "User created"
 
-    Scenario: Got error message when try to create a user with no last name
+    Scenario: Got an error message when try to create a user with no last name
         Given I don't have a user
         And I fill the informations without last name
         When I send the request to authentication api signup method
-        Then I should receive a response with status code 401 and a message "last name is required"
+        Then I should receive a response with status code 401 and a message "Last name cannot be null"
 
-    Scenario: Got error message when try to create a user with no first name
+    Scenario: Got an error message when try to create a user with no first name
         Given I don't have a user
         And I fill the informations without first name
         When I send the request to authentication api signup method
-        Then I should receive a response with status code 401 and a message "first name is required"
+        Then I should receive a response with status code 401 and a message "First name cannot be null"
 
-    Scenario: Got error message when try to create a user with no email
+    Scenario: Got an error message when try to create a user with no email
         Given I don't have a user
         And I fill the informations without email
         When I send the request to authentication api signup method
-        Then I should receive a response with status code 401 and a message "email is required"    
+        Then I should receive a response with status code 401 and a message "Email cannot be null"
 
-    Scenario: Got error message when try to create a user with no password
+    Scenario: Got an error message when try to create a user with invalid email format
+        Given I don't have a user
+        And I fill the informations with an email format invalid
+        When I send the request to authentication api signup method
+        Then I should receive a response with status code 401 and a message "Email format is invalid"
+
+    Scenario: Got an error message when try to create a user with no password
         Given I don't have a user
         And I fill the informations without password
         When I send the request to authentication api signup method
-        Then I should receive a response with status code 401 and a message "password is required"
+        Then I should receive a response with status code 401 and a message "Password cannot be null"
+
+    Scenario: Got an error message when try to create a user already created
+        Given I have an user 
+        And I try to create a new user with the same credentials
+        When I send the request to authentication api signup method
+        Then I should receive a response with status code 401 and a message "User already exists"
+
+    Scenario: Got an error message when try to create a user with week password with no uppercase character
+        Given I don't have a user
+        And I fill the informations with a week password with no uppercase character
+        When I send the request to authentication api signup method
+        Then I should receive a response with status code 401 and a message "The password must contain at least one lowercase alphabetical character, uppercase alphabetical character, one numeric character, one special character and be eight characters or longer"
+
+        Scenario: Got an error message when try to create a user with week password with no lowercase character
+        Given I don't have a user
+        And I fill the informations with a week password with no lowercase character
+        When I send the request to authentication api signup method
+        Then I should receive a response with status code 401 and a message "The password must contain at least one lowercase alphabetical character, uppercase alphabetical character, one numeric character, one special character and be eight characters or longer"
+
+        Scenario: Got an error message when try to create a user with week password with no special character
+        Given I don't have a user
+        And I fill the informations with a week password with no special character
+        When I send the request to authentication api signup method
+        Then I should receive a response with status code 401 and a message "The password must contain at least one lowercase alphabetical character, uppercase alphabetical character, one numeric character, one special character and be eight characters or longer"
+
+        Scenario: Got an error message when try to create a user with week password smaller than 8 characters
+        Given I don't have a user
+        And I fill the informations with a week password with smaller than 8 characters
+        When I send the request to authentication api signup method
+        Then I should receive a response with status code 401 and a message "The password must contain at least one lowercase alphabetical character, uppercase alphabetical character, one numeric character, one special character and be eight characters or longer"

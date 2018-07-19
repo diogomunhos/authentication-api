@@ -21,17 +21,25 @@ class UserHelper {
     isPasswordValidToLogin() {
         if (this.user.password === undefined || this.user.password === "" || this.user.password === null) {
             throw new Error(this.labels.missing_password_error);
+        } else {
+
         }
     }
 
-    isValidCredentials() {
-        if (this.user.length === 0) {
+    isValidCredentials(password) {
+        if (this.user.length === 0 || !this.isPasswordCorrectly(password)) {
             throw new Error(this.labels.invalid_username_or_password);
         }
     }
 
     setUser(user) {
         this.user = user;
+    }
+
+    isPasswordCorrectly(password) {
+        const bcrypt = require('bcrypt');
+        const response = bcrypt.compareSync(password, this.user[0].password);
+        return response;
     }
 }
 
