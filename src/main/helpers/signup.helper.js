@@ -9,6 +9,7 @@ class SignupHelper {
         this.isFirstNameValid();
         this.isPasswordValid();
         this.isEmailValid();
+        this.formatRequest();
     }
 
     isLastNameValid() {
@@ -52,6 +53,16 @@ class SignupHelper {
         return bcrypt.hashSync(password, 10);
     }
 
+    formatRequest() {
+        this.signup_request.username = String(this.signup_request.username).toLowerCase();
+        this.signup_request.email = String(this.signup_request.email).toLowerCase();
+        this.signup_request.first_name = String(this.signup_request.first_name).toUpperCase();
+        this.signup_request.last_name = String(this.signup_request.last_name).toUpperCase();
+    }
+
+    getRequest() {
+        return this.signup_request;
+    }
 
 }
 

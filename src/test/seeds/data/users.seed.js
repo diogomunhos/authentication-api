@@ -1,6 +1,6 @@
 user = {
-    first_name: "Young",
-    last_name: "MacGyver",
+    first_name: "YOUNG",
+    last_name: "MACGYVER",
     email: "young.macgyver@unbelievable.com",
     username: "young.macgyver@unbelievable.com",
     password: "SoFuckingCrazy#2018"

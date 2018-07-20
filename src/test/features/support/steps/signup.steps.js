@@ -22,8 +22,8 @@ Given('I fill the informations correctly', function(callback) {
     const request = {
         first_name: "teste",
         last_name: "name",
-        email: "teste@teste.com",
-        username: "teste@teste.com",
+        email: "tEste@teste.com",
+        username: "tEste@teste.com",
         password: "Password#2018"
     };
 
@@ -182,4 +182,14 @@ Then('I should receive a response with status code {int} and a message {string}'
         assert.equal(this.getResponse().body.message, message);
     }
     callback();
+})
+
+Then('doing a search on the database the first_name and last_name are uppercase text, username and email are lowercase', async function() {
+    const userModel = require('../../../../main/models/user.model');
+    const request = this.getSignupRequest();
+    const user = await userModel.find({ username: String(request.username).toLowerCase() }).exec();
+    assert.strictEqual(user[0].first_name, String(request.first_name).toUpperCase());
+    assert.strictEqual(user[0].last_name, String(request.last_name).toUpperCase());
+    assert.strictEqual(user[0].username, String(request.username).toLowerCase());
+    assert.strictEqual(user[0].email, String(request.email).toLowerCase());
 })

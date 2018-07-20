@@ -10,6 +10,7 @@ class SignupService {
         try {
             const signupHelper = new this.SignupHelper(signup_request);
             signupHelper.isRequestValid();
+            signup_request = signupHelper.getRequest();
             const result = await this.UserModel.find({ username: signup_request.username }).exec();
             signupHelper.userExists(result);
             signup_request.password = signupHelper.encryptPassword(signup_request.password);
