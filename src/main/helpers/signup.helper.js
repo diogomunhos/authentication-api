@@ -58,6 +58,7 @@ class SignupHelper {
         this.signup_request.email = String(this.signup_request.email).toLowerCase();
         this.signup_request.first_name = String(this.signup_request.first_name).toUpperCase();
         this.signup_request.last_name = String(this.signup_request.last_name).toUpperCase();
+        this.signup_request.password = this.encryptPassword(this.signup_request.password);
     }
 
     getRequest() {

@@ -1,9 +1,8 @@
 class SignupService {
     constructor() {
         this.SignupHelper = require('../../helpers/signup.helper');
-        this.UserModel = require('../../models/user.model');
-        this.ModelHelper = require('../../helpers/model.helper');
         this.ResponseHelper = require('../../helpers/response.helper');
+        this.UserRepository = require('../../repositories/user.repository');
     }
 
     async signup(signup_request) {
@@ -11,11 +10,9 @@ class SignupService {
             const signupHelper = new this.SignupHelper(signup_request);
             signupHelper.isRequestValid();
             signup_request = signupHelper.getRequest();
-            const result = await this.UserModel.find({ username: signup_request.username }).exec();
+            const result = await this.UserRepository.getUserByUsername(signup_request.username);
             signupHelper.userExists(result);
-            signup_request.password = signupHelper.encryptPassword(signup_request.password);
-            const model = new this.UserModel(signup_request);
-            const user = await model.save();
+            const user = await this.UserRepository.createUser(signup_request);
             const response = await this.ResponseHelper.createSignupSuccessResponse();
             return response;
         } catch (err) {
