@@ -1,24 +1,6 @@
 const server = require('./src/main/config/server/server');
 server.init();
-const jwt = require('jsonwebtoken');
-app.use('/auth/authorization', (req, res, next) => {
-    let token = req.get('Authorization');
-    token = token.split(' ')[1];
-    const primary_key = process.env.SECURE_KEY.split(",")[0];
-    const secundary_key = process.env.SECURE_KEY.split(",")[1];
-    const decode = jwt.verify(token, primary_key, (err, decoded) => {
-        if (err == null) {
-            //todo verificar usuário ativo. 
-        } else {
-            res.status(401).send({ message: err.message });
-        }
-        console.log('Error: ', err);
-        console.log('Decoded', decoded);
-        next();
-    })
-}, (req, res) => {
-    res.status(200).send({ teste: "teste" });
-})
+
 server.start();
 
 // const express = require('express');
