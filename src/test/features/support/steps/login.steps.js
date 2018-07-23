@@ -1,16 +1,18 @@
 const { Given, When, Then } = require('cucumber')
 const assert = require('assert');
-const userHelper = require('../helpers/user.helper')
+const userHelper = require('../helpers/user.helper');
+const LoginConfig = require('../config/login.config');
 
 Given('there I have an invalid username or password', function(callback) {
+    this.setAPIConfig(LoginConfig.getAPIConfiguration());
     const credentials = userHelper.getWrongCredentials();
-    this.setCredentials(credentials);
-    assert.equal(this.getCredentials(), credentials);
+    this.setRequest(credentials);
+    assert.equal(this.getRequest(), credentials);
     callback();
 });
 
 When('I send a request to authentication api login method', function(callback) {
-    this.makeLoginRequest().then((response) => {
+    this.makeRequest().then((response) => {
         this.setResponse(response);
         callback();
     }).catch((response) => {
@@ -27,24 +29,27 @@ Then('I should receive a status code {int} with a message {string}', function(st
 })
 
 Given('there I dont have an username', function(callback) {
+    this.setAPIConfig(LoginConfig.getAPIConfiguration());
     const credentials = userHelper.getNoUsernameCredentials();
-    this.setCredentials(credentials);
-    assert.equal(this.getCredentials(), credentials);
+    this.setRequest(credentials);
+    assert.equal(this.getRequest(), credentials);
     callback();
 });
 
 Given('there I dont have a password', function(callback) {
+    this.setAPIConfig(LoginConfig.getAPIConfiguration());
     const credentials = userHelper.getNoPasswordCredentials();
-    this.setCredentials(credentials);
-    assert.equal(this.getCredentials(), credentials);
+    this.setRequest(credentials);
+    assert.equal(this.getRequest(), credentials);
     callback();
 });
 
 Given('There I have a valid username and password', function(callback) {
+    this.setAPIConfig(LoginConfig.getAPIConfiguration());
     const credentials = userHelper.getValidCredentials();
 
-    this.setCredentials(credentials);
-    assert.equal(this.getCredentials(), credentials);
+    this.setRequest(credentials);
+    assert.equal(this.getRequest(), credentials);
     callback();
 });
 

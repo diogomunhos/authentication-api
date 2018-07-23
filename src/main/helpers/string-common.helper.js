@@ -10,6 +10,10 @@ class StringCommonHelper {
         return regex.test(password);
     }
 
+    isInvalid(string) {
+        return (string === undefined || string === "" || string === null);
+    }
+
 }
 
 module.exports = new StringCommonHelper();

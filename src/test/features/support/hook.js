@@ -8,7 +8,7 @@ BeforeAll(async function() {
     server.setDatabaseName("test");
     server.init();
     server.start();
-    await SeedGenerator.createUser();
+    await SeedGenerator.init();
 });
 
 AfterAll(function() {

@@ -2,6 +2,7 @@ class UserHelper {
     constructor(user) {
         this.user = user;
         this.labels = require('../../labels/authentication.label');
+        this.StringHelper = require('./string-common.helper');
     }
 
     isValidToLogin() {
@@ -10,19 +11,16 @@ class UserHelper {
     }
 
     isUsernameValidToLogin() {
-        const StringHelper = require('./string-common.helper');
-        if (this.user.username === undefined || this.user.username === "" || this.user.username === null) {
+        if (this.StringHelper.isInvalid(this.user.username)) {
             throw new Error(this.labels.missing_username_error);
         }
-        if (!StringHelper.isEmailValid(this.user.username)) {
+        if (!this.StringHelper.isEmailValid(this.user.username)) {
             throw new Error(this.labels.invalid_email_format);
         }
     }
     isPasswordValidToLogin() {
-        if (this.user.password === undefined || this.user.password === "" || this.user.password === null) {
+        if (this.StringHelper.isInvalid(this.user.password)) {
             throw new Error(this.labels.missing_password_error);
-        } else {
-
         }
     }
 

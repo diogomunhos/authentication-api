@@ -1,270 +1,127 @@
 const { Given, When, Then, And } = require('cucumber')
 const assert = require('assert');
 let user;
+const SignupConfig = require('../config/signup.config');
+const UserHelper = require('../helpers/user.helper');
+
 Given('I don\'t have a user', function(callback) {
+    this.setAPIConfig(SignupConfig.getAPIConfiguration());
     callback();
 })
 
 Given('I have an user', function(callback) {
     user = require('../../../seeds/data/users.seed')
+    this.setAPIConfig(SignupConfig.getAPIConfiguration());
     callback();
 })
 
 Given('I try to create a new user with the same credentials', function(callback) {
     const request = user;
-    this.setSignupRequest(request);
-
-    assert.equal(this.getSignupRequest(), request);
+    this.setRequest(request);
+    assert.equal(this.getRequest(), request);
     callback();
 })
 
 Given('I fill the informations correctly', function(callback) {
-    const request = {
-        first_name: "teste",
-        last_name: "name",
-        email: "tEste@teste.com",
-        username: "tEste@teste.com",
-        password: "Password#2018",
-        birthdate: new Date(),
-        born_country: "Brazil",
-        document_number: "1234567"
-    };
-
-    this.setSignupRequest(request);
-
-    assert.equal(this.getSignupRequest(), request);
+    const request = UserHelper.getValidUser();
+    this.setRequest(request);
+    assert.equal(this.getRequest(), request);
     callback();
 })
 
 Given('I fill the informations with a week password with no uppercase character', function(callback) {
-    const request = {
-        first_name: "teste",
-        last_name: "name",
-        email: "teste@teste.com",
-        username: "teste@teste.com",
-        password: "password#2018",
-        birthdate: new Date(),
-        born_country: "Brazil",
-        document_number: "1234567"
-    };
-
-    this.setSignupRequest(request);
-
-    assert.equal(this.getSignupRequest(), request);
+    const request = UserHelper.getSignupUserWithWeekPasswordUpperCase();
+    this.setRequest(request);
+    assert.equal(this.getRequest(), request);
     callback();
 })
 
 Given('I fill the informations with a week password with no lowercase character', function(callback) {
-    const request = {
-        first_name: "teste",
-        last_name: "name",
-        email: "teste@teste.com",
-        username: "teste@teste.com",
-        password: "PASSWORD#2018",
-        birthdate: new Date(),
-        born_country: "Brazil",
-        document_number: "1234567"
-    };
-
-    this.setSignupRequest(request);
-
-    assert.equal(this.getSignupRequest(), request);
+    const request = UserHelper.getSignupUserWithWeekPasswordLowerCase();
+    this.setRequest(request);
+    assert.equal(this.getRequest(), request);
     callback();
 })
 
 Given('I fill the informations with a week password with no special character', function(callback) {
-    const request = {
-        first_name: "teste",
-        last_name: "name",
-        email: "teste@teste.com",
-        username: "teste@teste.com",
-        password: "Password2018",
-        birthdate: new Date(),
-        born_country: "Brazil",
-        document_number: "1234567"
-    };
-
-    this.setSignupRequest(request);
-
-    assert.equal(this.getSignupRequest(), request);
+    const request = UserHelper.getSignupUserWithWeekPasswordSpecialCharacter();
+    this.setRequest(request);
+    assert.equal(this.getRequest(), request);
     callback();
 })
 
 Given('I fill the informations with a week password with smaller than 8 characters', function(callback) {
-    const request = {
-        first_name: "teste",
-        last_name: "name",
-        email: "teste@teste.com",
-        username: "teste@teste.com",
-        password: "Pass#20",
-        birthdate: new Date(),
-        born_country: "Brazil",
-        document_number: "1234567"
-    };
-
-    this.setSignupRequest(request);
-
-    assert.equal(this.getSignupRequest(), request);
+    const request = UserHelper.getSignupUserWithWeekPasswordLength();
+    this.setRequest(request);
+    assert.equal(this.getRequest(), request);
     callback();
 })
 
 Given('I fill the informations without last name', function(callback) {
-    const request = {
-        first_name: "teste",
-        email: "teste@teste.com",
-        username: "teste@teste.com",
-        password: "Password#2018",
-        birthdate: new Date(),
-        born_country: "Brazil",
-        document_number: "1234567"
-    };
-
-    this.setSignupRequest(request);
-
-    assert.equal(this.getSignupRequest(), request);
+    const request = UserHelper.getSignupUserWithoutLastName();
+    this.setRequest(request);
+    assert.equal(this.getRequest(), request);
     callback();
 })
 
 Given('I fill the informations without first name', function(callback) {
-    const request = {
-        last_name: "name",
-        email: "teste@teste.com",
-        username: "teste@teste.com",
-        password: "Password#2018",
-        birthdate: new Date(),
-        born_country: "Brazil",
-        document_number: "1234567"
-    };
-
-    this.setSignupRequest(request);
-
-    assert.equal(this.getSignupRequest(), request);
+    const request = UserHelper.getSignupUserWithoutFirstName();
+    this.setRequest(request);
+    assert.equal(this.getRequest(), request);
     callback();
 })
 
 Given('I fill the informations without birthdate', function(callback) {
-    const request = {
-        first_name: "first",
-        last_name: "name",
-        email: "teste@teste.com",
-        username: "teste@teste.com",
-        password: "Password#2018",
-        document_number: "123456",
-        born_country: "Brazil"
-    };
-
-    this.setSignupRequest(request);
-
-    assert.equal(this.getSignupRequest(), request);
+    const request = UserHelper.getSignupUserWithoutBirthDate();
+    this.setRequest(request);
+    assert.equal(this.getRequest(), request);
     callback();
 })
 
 Given('I fill the informations without document number', function(callback) {
-    const request = {
-        first_name: "first",
-        last_name: "name",
-        email: "teste@teste.com",
-        username: "teste@teste.com",
-        password: "Password#2018",
-        birthdate: new Date(),
-        born_country: "Brazil"
-    };
-
-    this.setSignupRequest(request);
-
-    assert.equal(this.getSignupRequest(), request);
+    const request = UserHelper.getSignupUserWithoutDocumentNumber();
+    this.setRequest(request);
+    assert.equal(this.getRequest(), request);
     callback();
 })
 
 Given('I fill the informations with an invalid birthdate', function(callback) {
-    const request = {
-        first_name: "first",
-        last_name: "name",
-        email: "teste@teste.com",
-        username: "teste@teste.com",
-        password: "Password#2018",
-        birthdate: "1231231231312qweqeq12312313",
-        born_country: "Brazil",
-        document_number: "123456"
-    };
-
-    this.setSignupRequest(request);
-
-    assert.equal(this.getSignupRequest(), request);
+    const request = UserHelper.getSignupUserWithInvalidBirthDate();
+    this.setRequest(request);
+    assert.equal(this.getRequest(), request);
     callback();
 })
 
 Given('I fill the informations without born country', function(callback) {
-    const request = {
-        first_name: "first",
-        last_name: "name",
-        email: "teste@teste.com",
-        username: "teste@teste.com",
-        password: "Password#2018",
-        birthdate: new Date(),
-        document_number: "123456"
-    };
-
-    this.setSignupRequest(request);
-
-    assert.equal(this.getSignupRequest(), request);
+    const request = UserHelper.getSignupUserWithoutBornCountry();
+    this.setRequest(request);
+    assert.equal(this.getRequest(), request);
     callback();
 })
 
 Given('I fill the informations without email', function(callback) {
-    const request = {
-        first_name: "teste",
-        last_name: "name",
-        username: "teste@teste.com",
-        password: "Password#2018",
-        birthdate: new Date(),
-        born_country: "Brazil",
-        document_number: "1234567"
-    };
-
-    this.setSignupRequest(request);
-
-    assert.equal(this.getSignupRequest(), request);
+    const request = UserHelper.getSignupUserWithoutEmail();
+    this.setRequest(request);
+    assert.equal(this.getRequest(), request);
     callback();
 })
 
 Given('I fill the informations without password', function(callback) {
-    const request = {
-        first_name: "teste",
-        last_name: "name",
-        email: "teste@teste.com",
-        username: "teste@teste.com",
-        birthdate: new Date(),
-        born_country: "Brazil",
-        document_number: "1234567"
-    };
-
-    this.setSignupRequest(request);
-
-    assert.equal(this.getSignupRequest(), request);
+    const request = UserHelper.getSignupUserWithoutPassword();
+    this.setRequest(request);
+    assert.equal(this.getRequest(), request);
     callback();
 })
 
 Given('I fill the informations with an email format invalid', function(callback) {
-    const request = {
-        first_name: "teste",
-        last_name: "name",
-        email: "teste.teste.com",
-        username: "teste@teste.com",
-        password: "Password#2018",
-        birthdate: new Date(),
-        born_country: "Brazil",
-        document_number: "1234567"
-    };
-
-    this.setSignupRequest(request);
-
-    assert.equal(this.getSignupRequest(), request);
+    const request = UserHelper.getSignupUserWithInvalidEmail();
+    this.setRequest(request);
+    assert.equal(this.getRequest(), request);
     callback();
 })
 
 When('I send the request to authentication api signup method', function(callback) {
-    this.makeSignupRequest().then((response) => {
+    this.makeRequest().then((response) => {
         this.setResponse(response);
         callback();
     }).catch((response) => {
@@ -286,7 +143,7 @@ Then('I should receive a response with status code {int} and a message {string}'
 
 Then('doing a search on the database the first_name and last_name are uppercase text, username and email are lowercase', async function() {
     const userModel = require('../../../../main/models/user.model');
-    const request = this.getSignupRequest();
+    const request = this.getRequest();
     const user = await userModel.find({ username: String(request.username).toLowerCase() }).exec();
     assert.strictEqual(user[0].first_name, String(request.first_name).toUpperCase());
     assert.strictEqual(user[0].last_name, String(request.last_name).toUpperCase());

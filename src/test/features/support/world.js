@@ -3,56 +3,41 @@ const http = require('request-promise');
 
 class World {
     constructor() {
-        this.credentials = {};
-        this.signup_request = {};
-        this.response = null;
+        this.credentials;
+        this.request;
+        this.response;
+        this.config;
+    }
+
+    setAPIConfig(config) {
+        this.config = config;
     }
 
     setResponse(response) {
         this.response = response;
     }
 
-    setCredentials(credentials) {
-        this.credentials = credentials;
-    }
-
-    getCredentials() {
-        return this.credentials;
-    }
-
     getResponse() {
         return this.response;
     }
 
-    setSignupRequest(signup_request) {
-        this.signup_request = signup_request;
+    setRequest(request) {
+        this.request = request;
     }
 
-    getSignupRequest() {
-        return this.signup_request;
+    getRequest() {
+        return this.request;
     }
 
-
-    makeLoginRequest() {
+    makeRequest() {
         return http({
-            method: 'POST',
-            uri: `http://localhost:${process.env.PORT}/auth/login`,
-            body: this.credentials,
-            json: true,
+            method: this.config.method,
+            uri: `http://localhost:${process.env.PORT}${this.config.uri}`,
+            body: this.getRequest(),
+            json: this.config.isJSON,
             resolveWithFullResponse: true
         })
     }
-
-    makeSignupRequest() {
-        return http({
-            method: 'POST',
-            uri: `http://localhost:${process.env.PORT}/auth/signup`,
-            body: this.signup_request,
-            json: true,
-            resolveWithFullResponse: true
-        })
-    }
-
 
 }
 

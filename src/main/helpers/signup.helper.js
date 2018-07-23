@@ -2,6 +2,7 @@ class SignupHelper {
     constructor(signup_request) {
         this.signup_request = signup_request;
         this.labels = require('../../labels/signup.label');
+        this.StringHelper = require('./string-common.helper');
     }
 
     isRequestValid() {
@@ -16,20 +17,20 @@ class SignupHelper {
     }
 
     isLastNameValid() {
-        if (this.signup_request.last_name === undefined || this.signup_request.last_name === "" || this.signup_request.last_name === null) {
+        if (this.StringHelper.isInvalid(this.signup_request.last_name)) {
             throw new Error(this.labels.missing_last_name_error);
         }
     }
 
     isFirstNameValid() {
-        if (this.signup_request.first_name === undefined || this.signup_request.first_name === "" || this.signup_request.first_name === null) {
+        if (this.StringHelper.isInvalid(this.signup_request.first_name)) {
             throw new Error(this.labels.missing_first_name_error);
         }
     }
 
     isPasswordValid() {
         const stringHelper = require('./string-common.helper');
-        if (this.signup_request.password === undefined || this.signup_request.password === "" || this.signup_request.password === null) {
+        if (this.StringHelper.isInvalid(this.signup_request.password)) {
             throw new Error(this.labels.missing_password_error);
         } else if (!stringHelper.isPasswordStrong(this.signup_request.password)) {
             throw new Error(this.labels.week_password_error);
@@ -38,7 +39,7 @@ class SignupHelper {
 
     isEmailValid() {
         const stringHelper = require('./string-common.helper');
-        if (this.signup_request.email === undefined || this.signup_request.email === "" || this.signup_request.email === null) {
+        if (this.StringHelper.isInvalid(this.signup_request.email)) {
             throw new Error(this.labels.missing_email_error);
         } else if (!stringHelper.isEmailValid(this.signup_request.email)) {
             throw new Error(this.labels.invalid_email_format_error);
@@ -46,7 +47,7 @@ class SignupHelper {
     }
 
     isBirthDateValid() {
-        if (this.signup_request.birthdate === null || this.signup_request.birthdate === undefined || this.signup_request.birthdate === "") {
+        if (this.StringHelper.isInvalid(this.signup_request.birthdate)) {
             throw new Error(this.labels.missing_birthdate_error);
         }
         if (new Date(this.signup_request.birthdate) == "Invalid Date") {
@@ -55,13 +56,13 @@ class SignupHelper {
     }
 
     isDocumentNumberValid() {
-        if (this.signup_request.document_number === null || this.signup_request.document_number === undefined || this.signup_request.document_number === "") {
+        if (this.StringHelper.isInvalid(this.signup_request.document_number)) {
             throw new Error(this.labels.missing_document_number_error);
         }
     }
 
     isBornCountryValid() {
-        if (this.signup_request.born_country === null || this.signup_request.born_country === undefined || this.signup_request.born_country === "") {
+        if (this.StringHelper.isInvalid(this.signup_request.born_country)) {
             throw new Error(this.labels.missing_born_country_error);
         }
     }
