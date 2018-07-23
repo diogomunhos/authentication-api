@@ -24,7 +24,10 @@ Given('I fill the informations correctly', function(callback) {
         last_name: "name",
         email: "tEste@teste.com",
         username: "tEste@teste.com",
-        password: "Password#2018"
+        password: "Password#2018",
+        birthdate: new Date(),
+        born_country: "Brazil",
+        document_number: "1234567"
     };
 
     this.setSignupRequest(request);
@@ -39,7 +42,10 @@ Given('I fill the informations with a week password with no uppercase character'
         last_name: "name",
         email: "teste@teste.com",
         username: "teste@teste.com",
-        password: "password#2018"
+        password: "password#2018",
+        birthdate: new Date(),
+        born_country: "Brazil",
+        document_number: "1234567"
     };
 
     this.setSignupRequest(request);
@@ -54,7 +60,10 @@ Given('I fill the informations with a week password with no lowercase character'
         last_name: "name",
         email: "teste@teste.com",
         username: "teste@teste.com",
-        password: "PASSWORD#2018"
+        password: "PASSWORD#2018",
+        birthdate: new Date(),
+        born_country: "Brazil",
+        document_number: "1234567"
     };
 
     this.setSignupRequest(request);
@@ -69,7 +78,10 @@ Given('I fill the informations with a week password with no special character', 
         last_name: "name",
         email: "teste@teste.com",
         username: "teste@teste.com",
-        password: "Password2018"
+        password: "Password2018",
+        birthdate: new Date(),
+        born_country: "Brazil",
+        document_number: "1234567"
     };
 
     this.setSignupRequest(request);
@@ -84,7 +96,10 @@ Given('I fill the informations with a week password with smaller than 8 characte
         last_name: "name",
         email: "teste@teste.com",
         username: "teste@teste.com",
-        password: "Pass#20"
+        password: "Pass#20",
+        birthdate: new Date(),
+        born_country: "Brazil",
+        document_number: "1234567"
     };
 
     this.setSignupRequest(request);
@@ -98,7 +113,10 @@ Given('I fill the informations without last name', function(callback) {
         first_name: "teste",
         email: "teste@teste.com",
         username: "teste@teste.com",
-        password: "Password#2018"
+        password: "Password#2018",
+        birthdate: new Date(),
+        born_country: "Brazil",
+        document_number: "1234567"
     };
 
     this.setSignupRequest(request);
@@ -112,7 +130,10 @@ Given('I fill the informations without first name', function(callback) {
         last_name: "name",
         email: "teste@teste.com",
         username: "teste@teste.com",
-        password: "Password#2018"
+        password: "Password#2018",
+        birthdate: new Date(),
+        born_country: "Brazil",
+        document_number: "1234567"
     };
 
     this.setSignupRequest(request);
@@ -120,12 +141,85 @@ Given('I fill the informations without first name', function(callback) {
     assert.equal(this.getSignupRequest(), request);
     callback();
 })
+
+Given('I fill the informations without birthdate', function(callback) {
+    const request = {
+        first_name: "first",
+        last_name: "name",
+        email: "teste@teste.com",
+        username: "teste@teste.com",
+        password: "Password#2018",
+        document_number: "123456",
+        born_country: "Brazil"
+    };
+
+    this.setSignupRequest(request);
+
+    assert.equal(this.getSignupRequest(), request);
+    callback();
+})
+
+Given('I fill the informations without document number', function(callback) {
+    const request = {
+        first_name: "first",
+        last_name: "name",
+        email: "teste@teste.com",
+        username: "teste@teste.com",
+        password: "Password#2018",
+        birthdate: new Date(),
+        born_country: "Brazil"
+    };
+
+    this.setSignupRequest(request);
+
+    assert.equal(this.getSignupRequest(), request);
+    callback();
+})
+
+Given('I fill the informations with an invalid birthdate', function(callback) {
+    const request = {
+        first_name: "first",
+        last_name: "name",
+        email: "teste@teste.com",
+        username: "teste@teste.com",
+        password: "Password#2018",
+        birthdate: "1231231231312qweqeq12312313",
+        born_country: "Brazil",
+        document_number: "123456"
+    };
+
+    this.setSignupRequest(request);
+
+    assert.equal(this.getSignupRequest(), request);
+    callback();
+})
+
+Given('I fill the informations without born country', function(callback) {
+    const request = {
+        first_name: "first",
+        last_name: "name",
+        email: "teste@teste.com",
+        username: "teste@teste.com",
+        password: "Password#2018",
+        birthdate: new Date(),
+        document_number: "123456"
+    };
+
+    this.setSignupRequest(request);
+
+    assert.equal(this.getSignupRequest(), request);
+    callback();
+})
+
 Given('I fill the informations without email', function(callback) {
     const request = {
         first_name: "teste",
         last_name: "name",
         username: "teste@teste.com",
-        password: "Password#2018"
+        password: "Password#2018",
+        birthdate: new Date(),
+        born_country: "Brazil",
+        document_number: "1234567"
     };
 
     this.setSignupRequest(request);
@@ -139,7 +233,10 @@ Given('I fill the informations without password', function(callback) {
         first_name: "teste",
         last_name: "name",
         email: "teste@teste.com",
-        username: "teste@teste.com"
+        username: "teste@teste.com",
+        birthdate: new Date(),
+        born_country: "Brazil",
+        document_number: "1234567"
     };
 
     this.setSignupRequest(request);
@@ -154,7 +251,10 @@ Given('I fill the informations with an email format invalid', function(callback)
         last_name: "name",
         email: "teste.teste.com",
         username: "teste@teste.com",
-        password: "Password#2018"
+        password: "Password#2018",
+        birthdate: new Date(),
+        born_country: "Brazil",
+        document_number: "1234567"
     };
 
     this.setSignupRequest(request);

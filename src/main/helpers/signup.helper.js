@@ -9,6 +9,9 @@ class SignupHelper {
         this.isFirstNameValid();
         this.isPasswordValid();
         this.isEmailValid();
+        this.isBirthDateValid();
+        this.isBornCountryValid();
+        this.isDocumentNumberValid();
         this.formatRequest();
     }
 
@@ -42,6 +45,27 @@ class SignupHelper {
         }
     }
 
+    isBirthDateValid() {
+        if (this.signup_request.birthdate === null || this.signup_request.birthdate === undefined || this.signup_request.birthdate === "") {
+            throw new Error(this.labels.missing_birthdate_error);
+        }
+        if (new Date(this.signup_request.birthdate) == "Invalid Date") {
+            throw new Error(this.labels.invalid_birthdate);
+        }
+    }
+
+    isDocumentNumberValid() {
+        if (this.signup_request.document_number === null || this.signup_request.document_number === undefined || this.signup_request.document_number === "") {
+            throw new Error(this.labels.missing_document_number_error);
+        }
+    }
+
+    isBornCountryValid() {
+        if (this.signup_request.born_country === null || this.signup_request.born_country === undefined || this.signup_request.born_country === "") {
+            throw new Error(this.labels.missing_born_country_error);
+        }
+    }
+
     userExists(user) {
         if (user !== undefined && user.length > 0) {
             throw new Error(this.labels.user_already_exists_error);
@@ -59,6 +83,11 @@ class SignupHelper {
         this.signup_request.first_name = String(this.signup_request.first_name).toUpperCase();
         this.signup_request.last_name = String(this.signup_request.last_name).toUpperCase();
         this.signup_request.password = this.encryptPassword(this.signup_request.password);
+        this.signup_request.user_preferences = {
+            email_valid: false,
+            push_notification: false,
+            email_marketing: false
+        }
     }
 
     getRequest() {

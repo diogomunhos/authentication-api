@@ -39,6 +39,30 @@ Feature: Create a new user using authentication api
         When I send the request to authentication api signup method
         Then I should receive a response with status code 401 and a message "Password cannot be null"
 
+    Scenario: Got an error message when try to create a user with no birthdate
+        Given I don't have a user
+        And I fill the informations without birthdate
+        When I send the request to authentication api signup method
+        Then I should receive a response with status code 401 and a message "Birthdate cannot be null"
+
+    Scenario: Got an error message when try to create a user with an invalid birthdate
+        Given I don't have a user
+        And I fill the informations with an invalid birthdate
+        When I send the request to authentication api signup method
+        Then I should receive a response with status code 401 and a message "Birthdate is not a valid date, date must be MM/DD/AAAA"    
+
+    Scenario: Got an error message when try to create a user with no document number
+        Given I don't have a user
+        And I fill the informations without document number
+        When I send the request to authentication api signup method
+        Then I should receive a response with status code 401 and a message "Document number cannot be null"
+
+    Scenario: Got an error message when try to create a user with born country
+        Given I don't have a user
+        And I fill the informations without born country
+        When I send the request to authentication api signup method
+        Then I should receive a response with status code 401 and a message "Born country cannot be null"  
+
     Scenario: Got an error message when try to create a user already created
         Given I have an user 
         And I try to create a new user with the same credentials

@@ -7,7 +7,7 @@ class SignupController {
 
     async signup() {
         const service = new this.SignupService();
-        const response = await service.signup({ first_name: this.req.body.first_name, last_name: this.req.body.last_name, email: this.req.body.email, username: this.req.body.username, password: this.req.body.password });
+        const response = await service.signup(this.req.body);
         this.res.status(response.statusCode).send(response.response);
     }
 }
