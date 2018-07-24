@@ -27,6 +27,12 @@ Feature: Create a new user using authentication api
         When I send the request to authentication api signup method
         Then I should receive a response with status code 401 and a message "Email cannot be null"
 
+    Scenario: Got an error message when try to create a user with no username
+        Given I don't have a user
+        And I fill the informations without username
+        When I send the request to authentication api signup method
+        Then I should receive a response with status code 401 and a message "Username cannot be null"    
+
     Scenario: Got an error message when try to create a user with invalid email format
         Given I don't have a user
         And I fill the informations with an email format invalid

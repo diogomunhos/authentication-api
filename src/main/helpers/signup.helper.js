@@ -8,6 +8,7 @@ class SignupHelper {
     isRequestValid() {
         this.isLastNameValid();
         this.isFirstNameValid();
+        this.isUsernameValid();
         this.isPasswordValid();
         this.isEmailValid();
         this.isBirthDateValid();
@@ -19,6 +20,12 @@ class SignupHelper {
     isLastNameValid() {
         if (this.StringHelper.isInvalid(this.signup_request.last_name)) {
             throw new Error(this.labels.missing_last_name_error);
+        }
+    }
+
+    isUsernameValid() {
+        if (this.StringHelper.isInvalid(this.signup_request.username)) {
+            throw new Error(this.labels.missing_username_error);
         }
     }
 

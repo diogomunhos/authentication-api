@@ -54,6 +54,12 @@ class UserHelper {
         return user;
     }
 
+    getSignupUserWithoutUsername() {
+        const user = this.generateBaseUser();
+        user.username = null;
+        return user;
+    }
+
     getSignupUserWithoutBornCountry() {
         const user = this.generateBaseUser();
         user.born_country = null;

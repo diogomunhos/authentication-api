@@ -106,6 +106,13 @@ Given('I fill the informations without email', function(callback) {
     callback();
 })
 
+Given('I fill the informations without username', function(callback) {
+    const request = UserHelper.getSignupUserWithoutUsername();
+    this.setRequest(request);
+    assert.equal(this.getRequest(), request);
+    callback();
+})
+
 Given('I fill the informations without password', function(callback) {
     const request = UserHelper.getSignupUserWithoutPassword();
     this.setRequest(request);
